@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevSecOps Engineer Test Assignment</title>
+    <style>
+        :root {
+            --header-bg: #1b1b1b;
+            --body-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent: #3b82f6;
+            --card-bg: #f8fafc;
+            --border-color: #e2e8f0;
+            --code-bg: #1e293b;
+            
+            --k1: 38;
+            --k2: 40;
+            --k3: 88;
+            --k4: 38;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--body-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--header-bg);
+            padding: 6rem 0 4rem;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .main-content {
+            padding: 2rem 0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+            width: 100%;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 1rem;
+            color: var(--text-primary);
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin: 2rem 0;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .number {
+            font-size: 0.875rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        pre {
+            background: var(--code-bg);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            color: #e2e8f0;
+            width: 100%;
+        }
+
+        code {
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 85%;
+            background-color: var(--code-bg);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+        }
+
+        .code-inline {
+            background: var(--card-bg);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            letter-spacing: -0.2px;
+        }
+
+        ul, ol {
+            list-style-position: outside;
+            margin: 1rem 0 1.5rem;
+            padding-left: 1.25rem;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin: 0.75rem 0;
+        }
+
+        .header-content {
+            max-width: 800px;
+        }
+
+        .directory-structure {
+            background: var(--code-bg);
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            white-space: pre;
+            width: 100%;
+        }
+
+        .section {
+            margin: 4rem 0;
+        }
+
+        .subsection {
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 4rem 0 3rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        .easter-egg-mode {
+            --header-bg: #4CAF50;
+            --body-bg: #ecf0f1;
+            --text-primary: #34495e;
+            --text-secondary: #7f8c8d;
+            --accent: #3498db;
+            --card-bg: #f5f6fa;
+            --border-color: #bdc3c7;
+            --code-bg: #2c3e50;
+        }
+        
+        .easter-egg-mode .header p { color: #ffffff !important; }
+
+        #easter-egg {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 200px;
+            height: 160px;
+            pointer-events: none;
+            z-index: 9999;
+            filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        #easter-egg .rotate {
+            animation: rotate 60s linear infinite;
+            transform-origin: center;
+            transform-box: fill-box;
+        }
+
+        #easter-egg .pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>DevSecOps Engineer Test Assignment</h1>
+                <p>A comprehensive evaluation focusing on Infrastructure as Code (IaC), secure configuration management, and AWS serverless implementation.</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <section class="section">
+                <h2>Overview</h2>
+                <p>This test assignment evaluates candidates for the DevSecOps Engineer position, focusing on Infrastructure as Code (IaC), secure configuration management, and AWS serverless implementation.</p>
+            </section>
+
+            <section class="section">
+                <h2>Task Description</h2>
+                <p>Create a secure infrastructure setup using Terraform and Terragrunt to deploy an AWS Lambda function that reads and outputs a secret from AWS Secrets Manager. The implementation should follow security best practices and demonstrate proficiency in CI/CD automation.</p>
+            </section>
+
+            <section class="section">
+                <h2>Technical Requirements</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Required Technologies</h3>
+                        <ul>
+                            <li>Terraform</li>
+                            <li>Terragrunt</li>
+                            <li>Mozilla SOPS</li>
+                            <li>GitHub Actions</li>
+                            <li>AWS (region: us-east-1)</li>
+                            <li>Terraform Provider SOPS</li>
+                            <li>OPA with Conftest</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Infrastructure Components</h3>
+                        <ul>
+                            <li>AWS Lambda function</li>
+                            <li>AWS Secrets Manager</li>
+                            <li>AWS KMS for encryption</li>
+                            <li>AWS IAM roles and policies</li>
+                            <li>CloudWatch Logs</li>
+                            <li>API Gateway (optional)</li>
+                            <li>OPA policies</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Project Structure</h2>
+                <div class="directory-structure">.
+├── .github
+│   └── workflows
+│       ├── pr.yml
+│       └── merge.yml
+├── terragrunt
+│   ├── envs
+│   │   ├── terragrunt.hcl
+│   │   ├── secrets
+│   │   │   ├── dev
+│   │   │   │   └── secrets.yaml
+│   │   │   └── prod
+│   │   │       └── secrets.yaml
+│   │   ├── security
+│   │   │   └── terragrunt.hcl
+│   │   ├── prod
+│   │   │   └── terragrunt.hcl
+│   │   └── dev
+│   │       └── terragrunt.hcl
+│   └── modules
+│       ├── lambda
+│       │   ├── main.tf
+│       │   ├── variables.tf
+│       │   └── outputs.tf
+│       └── security
+│           ├── main.tf
+│           ├── variables.tf
+│           └── outputs.tf
+├── policies
+│   ├── terraform
+│   │   ├── lambda.rego
+│   │   ├── iam.rego
+│   │   └── tags.rego
+├── src
+│   └── lambda
+│       └── main.py
+├── scripts
+│   └── example.sh
+└── README.md</div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>Key Structure Points</h3>
+                        <ul>
+                            <li>Root terragrunt.hcl in <code class="code-inline">terragrunt/envs</code> directory for common configurations</li>
+                            <li>Separate secrets directory <code class="code-inline">terragrunt/envs/secrets</code> for better security isolation</li>
+                            <li>Dedicated security environment in <code class="code-inline">terragrunt/envs/security</code> for KMS management</li>
+                            <li>Environment-specific configurations in <code class="code-inline">terragrunt/envs/dev</code> and <code class="code-inline">terragrunt/envs/prod</code></li>
+                            <li>Reusable modules in <code class="code-inline">terragrunt/modules</code></li>
+                            <li>OPA policies in <code class="code-inline">policies/terraform</code> directory</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Implementation Requirements</h2>
+
+                <div class="subsection">
+                    <h3>Lambda Function Implementation</h3>
+                    <pre><code>
+import json
+import boto3
+import os
+import time
+from botocore.exceptions import ClientError
+
+def get_secret():
+    secret_name = os.environ['SECRET_NAME']
+    region_name = os.environ['AWS_REGION']
+    profile_name = os.environ['AWS_DEFAULT_PROFILE']
+
+    session = boto3.session.Session(
+        region_name=os.environ.get("AWS_REGION", "us-east-1"), 
+        profile_name=profile_name
+    )
+    client = session.client(
+        service_name='secretsmanager',
+        region_name=region_name
+    )
+
+    try:
+        get_secret_value_response = client.get_secret_value(
+            SecretId=secret_name
+        )
+    except ClientError as e:
+        raise e
+    else:
+        if 'SecretString' in get_secret_value_response:
+            secret = json.loads(get_secret_value_response['SecretString'])
+            return secret
+
+def lambda_handler(event, context):
+    try:
+        secret = get_secret()
+        return {
+            'statusCode': 200,
+            'body': json.dumps({
+                'message': 'Secret retrieved successfully',
+                'secret': secret
+            })
+        }
+    except Exception as e:
+        return {
+            'statusCode': 500,
+            'body': json.dumps({
+                'message': 'Error retrieving secret',
+                'error': str(e)
+            })
+        }
+
+if __name__ == "__main__":
+    # Set environment variables for local testing
+    os.environ['AWS_DEFAULT_PROFILE'] = 'my-aws-profile'
+    os.environ['SECRET_NAME'] = 'dev/secrets/example'
+    os.environ['AWS_REGION'] = 'us-east-1'
+    
+    # Example event for testing
+    test_event = {
+        "version": "2.0",
+        "routeKey": "$default",
+        "rawPath": "/my/path",
+        "requestContext": {
+            "timeEpoch": int(time.time() * 1000)
+        },
+        "body": "{\"test\":\"body\"}",
+        "isBase64Encoded": False
+    }
+    
+    # Execute the lambda function locally
+    result = lambda_handler(test_event, None)
+    print(json.dumps(result, indent=2))
+                    </code></pre>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>Secrets Management</h3>
+                        <ul>
+                            <li>KMS keys must be created in the dedicated security environment</li>
+                            <li>All secrets must be encrypted using SOPS with AWS KMS</li>
+                            <li>Proper integration with AWS Secrets Manager</li>
+                            <li>Secure handling of environment variables</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>IAM Security</h3>
+                        <ul>
+                            <li>Implement least privilege principle</li>
+                            <li>Use KMS key policies to control access</li>
+                            <li>Security environment must be deployed first</li>
+                            <li>Application environments must have access to KMS key outputs</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Infrastructure Management</h3>
+                        <ul>
+                            <li>CloudWatch Logs configuration</li>
+                            <li>Error handling and reporting</li>
+                            <li>Performance monitoring setup</li>
+                            <li>OPA policies implementation</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Evaluation Criteria</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Security Implementation</h3>
+                        <ul>
+                            <li>IAM configuration correctness</li>
+                            <li>Secrets management</li>
+                            <li>Logging setup</li>
+                            <li>OPA policies implementation</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Code Quality</h3>
+                        <ul>
+                            <li>Terraform code modularity</li>
+                            <li>DRY principle adherence</li>
+                            <li>Idempotency</li>
+                            <li>Policy as Code quality</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Bonus Features</h3>
+                        <ul>
+                            <li>API Gateway integration</li>
+                            <li>Automatic secret rotation</li>
+                            <li>CloudWatch alarms setup</li>
+                            <li>Advanced OPA policies</li>
+                            <li>Custom policy tests</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                                <h2>Submission Guidelines</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Repository Requirements</h3>
+                        <ul>
+                            <li>Create a private GitHub repository</li>
+                            <li>Implement required functionality</li>
+                            <li>Provide repository access to reviewers</li>
+                            <li>Include comprehensive README.md</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Documentation Requirements</h3>
+                        <ul>
+                            <li>Setup instructions</li>
+                            <li>Architecture overview</li>
+                            <li>Security considerations</li>
+                            <li>Known limitations</li>
+                            <li>Policy documentation and examples</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>Additional Notes</h2>
+                <div class="grid">
+                    <div class="card">
+                        <h3>Development Guidelines</h3>
+                        <ul>
+                            <li>Use latest stable versions of all tools</li>
+                            <li>Focus on security and error handling</li>
+                            <li>Avoid hardcoded values</li>
+                            <li>Follow AWS best practices</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <h3>Documentation Guidelines</h3>
+                        <ul>
+                            <li>Provide comprehensive documentation</li>
+                            <li>Include examples of policy violations</li>
+                            <li>Document remediation steps</li>
+                            <li>Include troubleshooting guides</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <svg id="easter-egg" viewBox="0 0 300 200">
+        <defs>
+            <linearGradient id="devGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#4CAF50"/>
+                <stop offset="100%" style="stop-color:#8BC34A"/>
+            </linearGradient>
+            <linearGradient id="opsGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" style="stop-color:#FFC107"/>
+                <stop offset="100%" style="stop-color:#FFE082"/>
+            </linearGradient>
+        </defs>
+        
+        <circle class="rotate" cx="150" cy="100" r="90" 
+                fill="none" stroke="#E0F7FA" stroke-width="1" 
+                stroke-dasharray="4,4"/>
+        
+        <path d="M100,100 C100,77.6 117.6,60 140,60 C162.4,60 180,77.6 180,100 C180,122.4 162.4,140 140,140 L160,140 C182.4,140 200,122.4 200,100 C200,77.6 182.4,60 160,60 C137.6,60 120,77.6 120,100 C120,122.4 137.6,140 160,140 C137.6,140 120,122.4 120,100 Z" 
+              fill="url(#devGradient)"/>
+        
+        <path d="M200,100 C200,122.4 182.4,140 160,140 C137.6,140 120,122.4 120,100 C120,77.6 137.6,60 160,60 L140,60 C117.6,60 100,77.6 100,100 C100,122.4 117.6,140 140,140 C162.4,140 180,122.4 180,100 C180,77.6 162.4,60 140,60 C162.4,60 180,77.6 180,100 Z" 
+              fill="url(#opsGradient)"/>
+
+        <text x="150" y="40" text-anchor="middle" 
+              fill="#00BCD4" font-size="20" font-weight="bold"
+              class="pulse">DevSecOps</text>
+
+        <circle cx="150" cy="100" r="95" 
+                fill="none" stroke="#00BCD4" 
+                stroke-width="1" stroke-dasharray="2,4"/>
+    </svg>
+
+    <script>
+        (() => {
+            const s = getComputedStyle(document.documentElement);
+            const k = [s.getPropertyValue('--k1'), 
+                      s.getPropertyValue('--k2'),
+                      s.getPropertyValue('--k3'),
+                      s.getPropertyValue('--k4')]
+                      .map(x => parseInt(x.trim()));
+            
+            let seq = [];
+            let active = false;
+
+            document.addEventListener('keydown', (e) => {
+                seq.push(e.keyCode);
+                if (seq.length > k.length) seq.shift();
+                
+                if (seq.join('') === k.join('')) {
+                    if (!active) {
+                        document.body.classList.add('easter-egg-mode');
+                        document.getElementById('easter-egg').style.display = 'block';
+                        active = true;
+                    } else {
+                        document.body.classList.remove('easter-egg-mode');
+                        document.getElementById('easter-egg').style.display = 'none';
+                        active = false;
+                    }
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
